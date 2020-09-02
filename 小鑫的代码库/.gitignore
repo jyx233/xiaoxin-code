@@ -1,9 +1,5 @@
-resources/
-build/
-lib/
-students/
 .vs/
-_deps/
+x64/
 
 *Config.h
 
