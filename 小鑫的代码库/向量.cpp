@@ -24,3 +24,19 @@
 		数据 = &p;
 	}
 }
+
+double& 向量::operator[](unsigned i)
+{
+	if (类型 == 行向量)
+		return 数据[0][i];
+	else
+		return 数据[i][0];
+}
+
+const double& 向量::operator[](unsigned i)const
+{
+	if (类型 == 行向量)
+		return 数据[0][i];
+	else
+		return 数据[i][0];
+}

@@ -45,7 +45,39 @@ double 列主元LU分解::行列式() const
 	return 结果;
 
 }
+
+
 向量 列主元LU分解::解方程(向量 X)const
 {
+	assert(X.行数() == LU.行数());
+	int n = X.行数();
+	向量 结果(n, 向量::列向量);
 
+	double temp;
+	int i = X.行数(), k, r;
+
+	for (k = 0; k < i - 1; k++) {
+		r = P[k];
+		temp = 结果[k];
+		结果[k] = 结果[r];
+		结果[r] = temp;
+	}
+
+	for (unsigned i = 0; i < n; i++) {
+		unsigned j;
+		for (j = 0; j < i; j++) {
+			结果[i] = 结果[i] - LU[i][j] * 结果[j];
+		}
+	}
+
+
+	for (unsigned i = n - 1; i >= 0; i--) {
+		unsigned j;
+		for (j = i + 1; j < n; j++) {
+			结果[i] = 结果[i] - LU[i][j] * 结果[j];
+		}
+		结果[i] = 结果[i] / LU[i][i];
+	}
+
+	return 结果;
 }
